@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import axios from 'axios';
 import { jsPDF } from 'jspdf';
-import autoTable from 'jspdf-autotable';
+import { autoTable } from 'jspdf-autotable';
 
 // API Configuration
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
@@ -352,9 +352,6 @@ const BookingHistory = () => {
         unit: 'mm',
         format: 'a4'
       });
-
-      // Explicitly register autoTable with the document instance
-      autoTable(doc);
       
       // Header with gradient (simulate with colors)
       doc.setFillColor(0, 139, 208);
@@ -446,7 +443,7 @@ const BookingHistory = () => {
           String(p.seatNumber || 'TBA')
         ]);
 
-        doc.autoTable({
+        autoTable(doc, {
           startY: yPos + 5,
           head: [['S.No', 'Name', 'Age', 'Gender', 'Seat/Berth']],
           body: passengerData,
@@ -473,8 +470,9 @@ const BookingHistory = () => {
           }
         });
 
-        // Get position after table
-        yPos = doc.lastAutoTable?.finalY || yPos + 30;
+        // Get position after table - autoTable returns the finalY position
+        const tableResult = doc.lastAutoTable;
+        yPos = tableResult?.finalY || yPos + 30;
       }
 
       // Payment Details Section
@@ -530,7 +528,8 @@ const BookingHistory = () => {
       
     } catch (err) {
       console.error('Error generating PDF:', err);
-      alert(`Failed to generate PDF: ${err.message}`);
+      console.error('Error stack:', err.stack);
+      alert(`Failed to generate PDF: ${err.message || 'Unknown error occurred'}`);
     } finally {
       setDownloadingPdf(null);
     }

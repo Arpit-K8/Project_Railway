@@ -35,7 +35,7 @@ const FoodMenu = () => {
         price: "₹120",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1544025162-d76690b67f61?w=500&q=80",
+          "https://saltedmint.com/wp-content/uploads/2024/01/Vegetable-Spring-Rolls-4-500x375.jpg",
       },
       {
         name: "French Fries",
@@ -43,7 +43,7 @@ const FoodMenu = () => {
         price: "₹90",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1518013431117-e595ed537965?w=500&q=80",
+          "https://www.inspiredtaste.net/wp-content/uploads/2022/10/Baked-French-Fries-Recipe-1200.jpg",
       },
       {
         name: "Chicken 65",
@@ -59,7 +59,7 @@ const FoodMenu = () => {
         price: "₹180",
         type: "non-veg",
         image:
-          "https://images.unsplash.com/photo-1626703411326-27e8a83bdadb?w=500&q=80",
+          "https://i.ndtvimg.com/i/2016-09/fish-fingers-625_625x350_71474443801.jpg",
       },
     ],
     soups: [
@@ -77,7 +77,7 @@ const FoodMenu = () => {
         price: "₹90",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1588566565463-180a5b2090d2?w=500&q=80",
+          "https://media.istockphoto.com/id/182119752/photo/soup-of-fresh-yellow-corn-served-on-a-wooden-table.jpg?s=612x612&w=0&k=20&c=SyhQNaSyAwFLz_sLmsGyfe-opZD2bFVHgZuucQlfmxg=",
       },
       {
         name: "Manchow Soup",
@@ -85,7 +85,7 @@ const FoodMenu = () => {
         price: "₹100",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80",
+          "https://cdn1.foodviva.com/static-content/food-images/soup-recipes/manchow-soup/manchow-soup.jpg",
       },
       {
         name: "Chicken Clear Soup",
@@ -112,7 +112,7 @@ const FoodMenu = () => {
         price: "₹140",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80",
+          "https://shwetainthekitchen.com/wp-content/uploads/2022/09/vegetarian-caesar-salad.jpg",
       },
       {
         name: "Grilled Chicken Salad",
@@ -138,7 +138,7 @@ const FoodMenu = () => {
         price: "₹180",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80",
+          "https://sinfullyspicy.com/wp-content/uploads/2015/03/1200-by-1200-images-1.jpg",
       },
       {
         name: "Chana Masala",
@@ -146,7 +146,7 @@ const FoodMenu = () => {
         price: "₹160",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&q=80",
+          "https://i.ytimg.com/vi/zqlWezI-DBg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBoFMlio7Zaic0VJ3te4B-JKEDMAA",
       },
       {
         name: "Veg Biryani",
@@ -154,7 +154,7 @@ const FoodMenu = () => {
         price: "₹200",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&q=80",
+          "https://i.ytimg.com/vi/Do7ZdUodDdw/maxresdefault.jpg",
       },
       {
         name: "Butter Chicken",
@@ -188,7 +188,7 @@ const FoodMenu = () => {
         price: "₹40",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1626074353765-517a681e40be?w=500&q=80",
+          "https://t3.ftcdn.net/jpg/08/95/50/04/360_F_895500474_IDUMxbOGEBn29tyPyjG8oLEEWlK8ZlOg.jpg",
       },
       {
         name: "Tandoori Roti",
@@ -196,7 +196,7 @@ const FoodMenu = () => {
         price: "₹30",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1626074353765-517a681e40be?w=500&q=80",
+          "https://media.istockphoto.com/id/1298650125/photo/homemade-roti-chapati-flatbread.jpg?s=612x612&w=0&k=20&c=C7BH_JgNd4u9L-kYWfPUYVIEIecw5A2deVktAPlTL-g=",
       },
       {
         name: "Jeera Rice",
@@ -212,7 +212,7 @@ const FoodMenu = () => {
         price: "₹60",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&q=80",
+          "https://www.cookclickndevour.com/wp-content/uploads/2019/07/vegetable-raita-recipe.jpg",
       },
     ],
     desserts: [
@@ -222,7 +222,7 @@ const FoodMenu = () => {
         price: "₹60",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1606313564559-46950d3bc2ee?w=500&q=80",
+          "https://thumbs.dreamstime.com/b/indian-sweets-gulab-jamun-125773271.jpg",
       },
       {
         name: "Rasgulla",
@@ -230,7 +230,7 @@ const FoodMenu = () => {
         price: "₹60",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1589119908688-c87898fb50b7?w=500&q=80",
+          "https://thumbs.dreamstime.com/b/close-up-bowl-indian-rasgulla-dessert-30268552.jpg",
       },
       {
         name: "Choice of Ice Cream",
@@ -238,7 +238,7 @@ const FoodMenu = () => {
         price: "₹80",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=500&q=80",
+          "https://media.istockphoto.com/id/1090251878/photo/ice-cream-balls-in-paper-cup.jpg?s=612x612&w=0&k=20&c=QlII4k-Q2phcY190xGomdSsGwv-ab4jStWIhl_d5ndI=",
       },
       {
         name: "Chocolate Brownie",
@@ -246,7 +246,7 @@ const FoodMenu = () => {
         price: "₹100",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?w=500&q=80",
+          "https://bakewithshivesh.com/wp-content/uploads/2024/08/960E4D82-3A2F-436E-89AA-26F56A856DFE.jpg",
       },
     ],
     beverages: [
@@ -256,7 +256,7 @@ const FoodMenu = () => {
         price: "₹30",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?w=500&q=80",
+          "https://www.teaforturmeric.com/wp-content/uploads/2021/11/Masala-Chai-Tea-Recipe-Card.jpg",
       },
       {
         name: "Filter Coffee",
@@ -290,7 +290,7 @@ const FoodMenu = () => {
         price: "₹250",
         type: "veg",
         image:
-          "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=500&q=80",
+          "https://5.imimg.com/data5/ECOM/Default/2023/9/340858396/AP/RZ/RZ/187325221/1693843320605-3e0ba0540b1cc809e84bbd9b762fd686-500x500.jpeg",
       },
       {
         name: "Chicken Thali",
@@ -585,47 +585,60 @@ const FoodMenu = () => {
       {/* Cart Sidebar */}
       {showCart && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-50"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 transition-all duration-300"
           onClick={() => setShowCart(false)}
         >
           <div
-            className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl flex flex-col"
+            className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-300 animate-slide-in"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Cart Header */}
-            <div className="p-6 border-b border-gray-200 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-[#1C335C]">Your Cart</h2>
+            <div className="p-6 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-gray-50 to-white">
+              <h2 className="text-2xl font-bold text-[#1C335C] flex items-center gap-2">
+                <ShoppingCart className="text-[#008BD0]" />
+                Your Cart
+              </h2>
               <button
                 onClick={() => setShowCart(false)}
-                className="text-gray-500 hover:text-gray-700 transition"
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500 hover:text-red-500"
               >
                 <X size={24} />
               </button>
             </div>
 
             {/* Cart Items */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
               {cart.length === 0 ? (
-                <div className="text-center text-gray-500 mt-10">
-                  <ShoppingCart size={48} className="mx-auto mb-4 opacity-50" />
-                  <p>Your cart is empty</p>
+                <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4">
+                  <div className="bg-gray-50 p-6 rounded-full">
+                    <ShoppingCart size={64} className="opacity-20" />
+                  </div>
+                  <p className="text-lg font-medium">Your cart is empty</p>
+                  <button 
+                    onClick={() => setShowCart(false)}
+                    className="text-[#008BD0] font-semibold hover:underline"
+                  >
+                    Browse Menu
+                  </button>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {cart.map((item, index) => (
                     <div
                       key={index}
-                      className="bg-gray-50 rounded-lg p-4 flex gap-4"
+                      className="group bg-white border border-gray-100 rounded-xl p-3 flex gap-4 hover:shadow-md transition-all duration-200"
                     >
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-20 h-20 object-cover rounded-lg"
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h3 className="font-semibold text-[#1C335C] flex items-center gap-1">
+                      <div className="relative overflow-hidden rounded-lg w-24 h-24 flex-shrink-0">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                      <div className="flex-1 flex flex-col justify-between py-1">
+                        <div>
+                          <div className="flex items-start justify-between">
+                            <h3 className="font-semibold text-[#1C335C] text-lg leading-tight flex items-center gap-2">
                               {item.type === "veg" ? (
                                 <VegIndicator />
                               ) : (
@@ -633,27 +646,33 @@ const FoodMenu = () => {
                               )}
                               {item.name}
                             </h3>
-                            <p className="text-sm text-gray-600">
-                              {item.price}
-                            </p>
                           </div>
+                          <p className="text-[#008BD0] font-bold mt-1">
+                            {item.price}
+                          </p>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <button
-                            onClick={() => removeFromCart(item.name)}
-                            className="bg-white border border-gray-300 rounded-lg p-1 hover:bg-gray-100 transition"
-                          >
-                            <Minus size={16} />
-                          </button>
-                          <span className="font-semibold text-[#1C335C] w-8 text-center">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => addToCart(item)}
-                            className="bg-white border border-gray-300 rounded-lg p-1 hover:bg-gray-100 transition"
-                          >
-                            <Plus size={16} />
-                          </button>
+                        
+                        <div className="flex items-center justify-between mt-2">
+                          <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-1">
+                            <button
+                              onClick={() => removeFromCart(item.name)}
+                              className="w-8 h-8 flex items-center justify-center bg-white rounded shadow-sm text-gray-600 hover:bg-red-50 hover:text-red-500 transition-colors"
+                            >
+                              <Minus size={16} />
+                            </button>
+                            <span className="font-bold text-[#1C335C] w-6 text-center">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() => addToCart(item)}
+                              className="w-8 h-8 flex items-center justify-center bg-white rounded shadow-sm text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors"
+                            >
+                              <Plus size={16} />
+                            </button>
+                          </div>
+                          <div className="text-sm font-medium text-gray-500">
+                            ₹{parseInt(item.price.replace("₹", "")) * item.quantity}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -664,20 +683,35 @@ const FoodMenu = () => {
 
             {/* Cart Footer */}
             {cart.length > 0 && (
-              <div className="p-6 border-t border-gray-200 bg-gray-50">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-lg font-semibold text-[#1C335C]">
-                    Total
-                  </span>
-                  <span className="text-2xl font-bold text-[#008BD0]">
-                    ₹{getTotalPrice()}
-                  </span>
+              <div className="p-6 border-t border-gray-100 bg-white space-y-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-gray-500">
+                    <span>Subtotal</span>
+                    <span>₹{getTotalPrice()}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-gray-500">
+                    <span>Delivery Charge</span>
+                    <span>₹50</span>
+                  </div>
+                  <div className="flex items-center justify-between text-gray-500">
+                    <span>GST (5%)</span>
+                    <span>₹{Math.round((getTotalPrice() + 50) * 0.05)}</span>
+                  </div>
+                  <div className="border-t border-dashed border-gray-200 my-2"></div>
+                  <div className="flex items-center justify-between text-xl font-bold text-[#1C335C]">
+                    <span>Total Amount</span>
+                    <span>₹{getTotalPrice() + 50 + Math.round((getTotalPrice() + 50) * 0.05)}</span>
+                  </div>
                 </div>
+
                 <button
                   onClick={handleCheckout}
-                  className="w-full bg-[#008BD0] hover:bg-[#006BA0] text-white py-3 rounded-lg font-semibold"
+                  className="w-full bg-[#008BD0] hover:bg-[#0077B5] text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-blue-200 transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2"
                 >
-                  Proceed to Checkout
+                  <span>Pay with Razorpay</span>
+                  <span className="bg-white/20 px-2 py-0.5 rounded text-sm">
+                  ₹{getTotalPrice() + 50 + Math.round((getTotalPrice() + 50) * 0.05)}
+                  </span>
                 </button>
               </div>
             )}
