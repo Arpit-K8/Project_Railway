@@ -246,12 +246,35 @@ const BookingHistory = () => {
       const response = await api.get('/bookings');
       
       if (response.data.success) {
+        
+        const getMaxSeats = (travelClass) => {
+          // Normalize class name for matching
+          const cls = (travelClass || '').toUpperCase();
+          if (cls.includes('1A')) return 24;
+          if (cls.includes('2A')) return 48;
+          // Default to 72 for 3A, SL, CC, 2S and others
+          return 72; 
+        };
+
+        const generateSeatNumber = (travelClass) => {
+           const max = getMaxSeats(travelClass);
+           return Math.floor(Math.random() * max) + 1;
+        };
+
         // Normalize data to ensure status is consistent
-        const normalizedBookings = (response.data.bookings || []).map(b => ({
-          ...b,
-          // Backend returns bookingStatus, frontend often expects status
-          status: b.bookingStatus || b.status || 'Pending'
-        }));
+        const normalizedBookings = (response.data.bookings || []).map(b => {
+          const tClass = b.trainClass || b.class || '3A'; // Default to 3A if missing
+          return {
+            ...b,
+            // Backend returns bookingStatus, frontend often expects status
+            status: b.bookingStatus || b.status || 'Pending',
+            trainClass: tClass, 
+            passengers: (b.passengers || []).map(p => ({
+              ...p,
+              seatNumber: p.seatNumber && p.seatNumber !== 'TBA' ? p.seatNumber : generateSeatNumber(tClass)
+            }))
+          };
+        });
         setBookings(normalizedBookings);
       } else {
         throw new Error(response.data.message || 'Failed to fetch bookings');

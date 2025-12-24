@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, User, Calendar, MapPin, Phone, Mail, CreditCard, Armchair, Train, Clock, Plus, Trash2 } from 'lucide-react';
+import { ArrowLeft, User, Calendar, MapPin, Phone, Mail, CreditCard, Armchair, Train, Clock, Plus, Trash2, Briefcase } from 'lucide-react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import {initiatePayment} from '../utils/paymentUtils.js'
@@ -21,6 +21,11 @@ const BookTicketPage = () => {
       email: ''
   });
 
+  const [bookingDetails, setBookingDetails] = useState({
+    travelClass: '3A',
+    quota: 'GN'
+  });
+
   const [loading, setLoading] = useState(false);
 
   // Handle changes for a specific passenger
@@ -34,6 +39,11 @@ const BookTicketPage = () => {
   const handleContactChange = (e) => {
       const { name, value } = e.target;
       setContactInfo(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleBookingDetailsChange = (e) => {
+    const { name, value } = e.target;
+    setBookingDetails(prev => ({ ...prev, [name]: value }));
   };
 
   const addPassenger = () => {
@@ -55,19 +65,37 @@ const BookTicketPage = () => {
   const gst = Math.round(baseFare * 0.05);
   const totalAmount = baseFare + gst;
 
+    const getMaxSeats = (travelClass) => {
+      switch(travelClass) {
+        case '1A': return 24;
+         case '2A': return 48;
+         case '3A': return 72;
+         case 'SL': return 72;
+         case 'CC': return 72;
+         case '2S': return 72;
+         default: return 72;
+      }
+    };
+
+    const generateSeatNumber = (travelClass) => {
+       const max = getMaxSeats(travelClass);
+       return Math.floor(Math.random() * max) + 1;
+    }
+
   const bookingData = {
     from: train?.from_station_name || train?.from_std,
     to: train?.to_station_name || train?.to_std,
     date: new Date(date),
     trainNumber: train?.train_number,
     trainName: train?.train_name,
-    class: '3A',
-    quota: 'GN',
+    class: bookingDetails.travelClass,
+    quota: bookingDetails.quota,
     passengers: passengers.map(p => ({
       name: p.name,
       age: parseInt(p.age),
       gender: p.gender,
-      berthPreference: p.berthPreference
+      berthPreference: p.berthPreference,
+      seatNumber: generateSeatNumber(bookingDetails.travelClass)
     })),
     contactEmail: contactInfo.email,
     contactPhone: contactInfo.mobile,
@@ -123,6 +151,53 @@ const BookTicketPage = () => {
 
             <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                 <div className="p-8 space-y-8">
+                    
+                    {/* Class and Quota Selection */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 border-b border-gray-100">
+                        <div className="space-y-2">
+                            <label className="text-sm font-bold text-gray-700 ml-2">Class</label>
+                            <div className="relative">
+                                <Armchair className="absolute left-4 top-3.5 text-gray-400 w-5 h-5 pointer-events-none"/>
+                                <select 
+                                    name="travelClass"
+                                    value={bookingDetails.travelClass}
+                                    onChange={handleBookingDetailsChange}
+                                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-[#008BD0] focus:ring-4 focus:ring-blue-50/50 transition-all duration-300 outline-none font-medium text-gray-800 appearance-none cursor-pointer"
+                                >
+                                    <option value="1A">AC First Class (1A)</option>
+                                    <option value="2A">AC 2 Tier (2A)</option>
+                                    <option value="3A">AC 3 Tier (3A)</option>
+                                    <option value="SL">Sleeper (SL)</option>
+                                    <option value="CC">AC Chair Car (CC)</option>
+                                    <option value="2S">Second Sitting (2S)</option>
+                                </select>
+                                <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-bold text-gray-700 ml-2">Quota</label>
+                            <div className="relative">
+                                <Briefcase className="absolute left-4 top-3.5 text-gray-400 w-5 h-5 pointer-events-none"/>
+                                <select 
+                                    name="quota"
+                                    value={bookingDetails.quota}
+                                    onChange={handleBookingDetailsChange}
+                                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-[#008BD0] focus:ring-4 focus:ring-blue-50/50 transition-all duration-300 outline-none font-medium text-gray-800 appearance-none cursor-pointer"
+                                >
+                                    <option value="GN">General (GN)</option>
+                                    {/* <option value="TQ">Tatkal (TQ)</option> */}
+                                    <option value="LD">Ladies (LD)</option>
+                                    <option value="SS">Senior Citizen (SS)</option>
+                                </select>
+                                <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                     {/* Passengers Loop */}
                     <div className="space-y-8">

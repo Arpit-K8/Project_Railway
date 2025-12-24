@@ -45,7 +45,7 @@ const ticketBookingSchema = new mongoose.Schema({
       name: { type: String, required: true },
       age: { type: Number, required: true },
       gender: { type: String, required: true },
-      berthPreference: String,
+      berthPreference: { type: String, required: true },
       seatNumber: String,
       status: { type: String, default: "Confirmed" },
     },
