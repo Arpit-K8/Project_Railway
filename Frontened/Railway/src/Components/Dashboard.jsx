@@ -52,6 +52,8 @@ const Dashboard = () => {
   const [TotalBookings, setTotalBookings] = useState("24"); // it should be real value from backend
 
   const [activeSection, setActiveSection] = useState("overview");
+  const [recentBookings, setRecentBookings] = useState([]);
+  const [loadingBookings, setLoadingBookings] = useState(false);
 
   useEffect(() => {
     if (location.state && location.state.section) {
@@ -71,7 +73,49 @@ const Dashboard = () => {
     }
 
     fetchData();
-  })
+  }, []);
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
+
+  useEffect(() => {
+    const fetchRecentBookings = async () => {
+      try {
+        setLoadingBookings(true);
+        const token = localStorage.getItem('authToken') || 
+                      localStorage.getItem('token') || 
+                      localStorage.getItem('accessToken');
+        
+        if (!token) return;
+
+        const response = await axios.get(`${API_BASE_URL}/bookings`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (response.data.success) {
+           const sortedBookings = (response.data.bookings || []).sort((a, b) => {
+              return new Date(b.bookingDate || b.createdAt) - new Date(a.bookingDate || a.createdAt);
+           }).slice(0, 5);
+
+           const normalizedBookings = sortedBookings.map(b => ({
+             id: b.pnr || b.id,
+             train: `${b.trainNumber} ${b.trainName}`,
+             from: b.from || b.fromStation,
+             to: b.to || b.toStation,
+             date: new Date(b.date || b.journeyDate).toLocaleDateString('en-IN'),
+             status: b.bookingStatus || b.status || 'Pending'
+           }));
+
+           setRecentBookings(normalizedBookings);
+        }
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      } finally {
+        setLoadingBookings(false);
+      }
+    };
+
+    fetchRecentBookings();
+  }, []);
 
   const quickStats = [
     // {
@@ -100,32 +144,7 @@ const Dashboard = () => {
     // },
   ];
 
-  const recentBookings = [
-    {
-      id: "TKT001",
-      train: "12345 Rajdhani Exp",
-      from: "New Delhi",
-      to: "Mumbai",
-      date: "2025-11-15",
-      status: "Confirmed",
-    },
-    {
-      id: "TKT002",
-      train: "67890 Shatabdi Exp",
-      from: "Ludhiana",
-      to: "Delhi",
-      date: "2025-11-12",
-      status: "Waitlist",
-    },
-    {
-      id: "TKT003",
-      train: "54321 Duronto Exp",
-      from: "Mumbai",
-      to: "Bangalore",
-      date: "2025-11-10",
-      status: "Confirmed",
-    },
-  ];
+
 
   const trainServices = [
     { name: "AC First Class", available: 45, total: 60, price: "₹2500" },
@@ -189,6 +208,9 @@ const Dashboard = () => {
               <h3 className="text-xl font-semibold text-[#1C335C] mb-4">
                 Recent Bookings
               </h3>
+              {loadingBookings ? (
+                 <p className="text-gray-500">Loading bookings...</p>
+              ) : recentBookings.length > 0 ? (
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50">
@@ -228,7 +250,7 @@ const Dashboard = () => {
                         <td className="px-4 py-3">
                           <span
                             className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                              booking.status === "Confirmed"
+                              booking.status === "Confirmed" || booking.status === "confirmed"
                                 ? "bg-green-100 text-green-800"
                                 : "bg-yellow-100 text-yellow-800"
                             }`}
@@ -241,6 +263,9 @@ const Dashboard = () => {
                   </tbody>
                 </table>
               </div>
+              ) : (
+                <p className="text-gray-500">No recent bookings found.</p>
+              )}
             </div>
           </div>
         );

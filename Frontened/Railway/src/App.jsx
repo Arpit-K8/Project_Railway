@@ -28,7 +28,7 @@ import Profile from './Services/Profile.jsx';
 const router = createBrowserRouter([
   { path: '/', element: <LandingPage/> },
   { path: '/search-trains', element: <SearchTrains/> },
-  {path: 'book-ticket/:trainNumber', element: <BookTicketPage />},
+  { path: 'book-ticket/:trainNumber', element: <BookTicketPage />},
   { path: '/dashboard', element: <><Navbar/><Dashboard /></> },
   { path: '/login', element: <Login/> },
   { path: '/signup', element: <SignUpPage /> },
@@ -36,14 +36,14 @@ const router = createBrowserRouter([
   { path: '/tours', element: <><Navbar/><TourMainPage /></> },
   { path: '/aboutus', element: <><Navbar/><Aboutus /><Footer/></> },
   { path: '/royal-journeys', element: <><Navbar/><RoyalPage /></> },
-  {path: 'royal-booking/:trainId', element: <><Navbar/><RoyalBookTicketPage /><Footer /></>},
-  {path: '/tour-booking/:packageId', element: <><Navbar /><TourBookTicketPage /><Footer /></>},
+  { path: 'royal-booking/:trainId', element: <><Navbar/><RoyalBookTicketPage /><Footer /></>},
+  { path: '/tour-booking/:packageId', element: <><Navbar /><TourBookTicketPage /><Footer /></>},
   { path: '/train-status', element: <><Navbar/><TrainStatusPage /><Footer/></> },
-  {path: '/check-email' , element: <CheckEmailPage />},
-  {path: '/verify-email/:verificationToken' , element:<VerifyEmailPage /> },
-  {path: '/reset-password/:resetToken' , element: <ResetPasswordPage />},
-  {path: '/change-password', element: <ChangePassword />},
-  {path: '/profile', element: <Profile />},
+  { path: '/check-email' , element: <CheckEmailPage />},
+  { path: '/verify-email/:verificationToken' , element:<VerifyEmailPage /> },
+  { path: '/reset-password/:resetToken' , element: <ResetPasswordPage />},
+  { path: '/change-password', element: <ChangePassword />},
+  { path: '/profile', element: <Profile />},
   { path: '*', element: <NotFound /> }
 
 ]);
