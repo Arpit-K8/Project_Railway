@@ -3,7 +3,7 @@
 End-to-end railway experience with separate frontend (React/Vite) and backend (Express/MongoDB) services covering auth, bookings, payments, notifications, live status, and rich UI journeys.
 
 ### People
-- Project owner: You
+- Project owner: Arpit Kumar
 - Contributor: Madhav Verma
 
 ### Architecture
