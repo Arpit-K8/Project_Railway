@@ -21,8 +21,7 @@ import BookTicketPage from './Pages/BookTicketPage.jsx';
 import TourBookTicketPage from './Pages/TourBookTicketPage.jsx';
 import ChangePassword from './Components/ChangePassword.jsx';
 import Profile from './Services/Profile.jsx';
-
-
+import ExecutiveChatPage from './Pages/ExecutiveChatPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -44,12 +43,12 @@ const router = createBrowserRouter([
   { path: '/reset-password/:resetToken' , element: <ResetPasswordPage />},
   { path: '/change-password', element: <ChangePassword />},
   { path: '/profile', element: <Profile />},
+  { path: '/executive-chat-demo', element: <ExecutiveChatPage />},
   { path: '*', element: <NotFound /> }
 
 ]);
 
 function App() {
-
   return (
     <>
       <div className="min-h-screen bg-gray-50">

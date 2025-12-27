@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { X, Send } from 'lucide-react';
+import { X, Send, User } from 'lucide-react';
 import botGif from '../assets/BotFace.gif';
 
 const HelpChatbot = ({ setChatOpen }) => {
@@ -8,7 +8,31 @@ const HelpChatbot = ({ setChatOpen }) => {
   ]);
   const [inputText, setInputText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [chatMode, setChatMode] = useState('bot'); // 'bot' or 'executive'
   const messagesEndRef = useRef(null);
+  const channelName = 'executive_chat_channel';
+
+  const isExecutiveAvailable = () => {
+    const now = new Date();
+    const hours = now.getHours();
+    return hours >= 9 && hours < 17;
+  };
+
+  useEffect(() => {
+    const bc = new BroadcastChannel(channelName);
+    bc.onmessage = (event) => {
+      if (event.data.type === 'EXECUTIVE_REPLY') {
+        const reply = {
+          id: Date.now(),
+          text: event.data.text,
+          sender: 'executive',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, reply]);
+      }
+    };
+    return () => bc.close();
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -60,7 +84,17 @@ const HelpChatbot = ({ setChatOpen }) => {
     
     // Greetings & Default
     else if (lowerText.includes('hello') || lowerText.includes('hi') || lowerText.includes('hey')) {
+      if (isExecutiveAvailable()) {
+         return "Hello! I'm RailBot. I can help with PNR, trains, and more. Or, if you prefer, you can ask to 'chat with executive' for human assistance (9 AM - 5 PM).";
+      }
       return "Hello! I'm RailBot. How can I assist you with your journey today? Ask me about PNR, trains, food, or tours!";
+    } else if (lowerText.includes('executive') || lowerText.includes('human') || lowerText.includes('agent')) {
+        if (isExecutiveAvailable()) {
+            setChatMode('executive');
+            return "Connecting you to an executive... You are now chatting with a live agent. Please state your query.";
+        } else {
+            return "Our executives are only available between 9 AM and 5 PM. Please try again during those hours.";
+        }
     } else {
       return "I'm not sure I understand. Try asking about 'PNR', 'Train Status', 'Food', 'Tours', 'Tatkal', or 'Royal Journeys'.";
     }
@@ -79,6 +113,15 @@ const HelpChatbot = ({ setChatOpen }) => {
 
     setMessages(prev => [...prev, userMessage]);
     setInputText("");
+    
+    if (chatMode === 'executive') {
+        // Log link for demo
+        const demoLink = `http://localhost:5173/executive-chat-demo?msg=${encodeURIComponent(userMessage.text)}`;
+        console.log("Executive Chat Link:", demoLink);
+        // Do not auto-reply, wait for executive
+        return;
+    }
+
     setIsTyping(true);
 
     // Simulate network delay
@@ -102,23 +145,47 @@ const HelpChatbot = ({ setChatOpen }) => {
           <div className="relative">
             <div className="w-3 h-3 bg-green-400 rounded-full absolute bottom-0 right-0 border-2 border-[#008BD0] z-10"></div>
             <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center overflow-hidden border-2 border-white/30">
-              <img src={botGif} alt="Bot Face" className='w-full h-full object-cover' />
+              {chatMode === 'executive' ? (
+                 <User className='w-8 h-8 text-white' />
+              ) : (
+                 <img src={botGif} alt="Bot Face" className='w-full h-full object-cover' />
+              )}
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-lg">RailBot Support</h3>
+            <h3 className="font-bold text-lg">{chatMode === 'executive' ? 'Executive Support' : 'RailBot Support'}</h3>
             <p className="text-xs text-blue-100 flex items-center gap-1">
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full inline-block"></span>
               Online
             </p>
           </div>
         </div>
-        <button 
-          onClick={() => setChatOpen(false)} 
-          className="text-white/80 hover:text-white hover:bg-white/10 p-2 rounded-full transition-colors"
-        >
-          <X className="w-6 h-6" />
-        </button>
+        
+        <div className="flex items-center gap-2">
+            {chatMode === 'bot' && isExecutiveAvailable() && (
+                <button 
+                    onClick={() => {
+                        setChatMode('executive');
+                        setMessages(prev => [...prev, {
+                            id: Date.now(), 
+                            text: "Connecting you to an executive... You are now chatting with a live agent. Please state your query.", 
+                            sender: 'bot', 
+                            timestamp: new Date()
+                        }]);
+                    }}
+                    title="Chat with Executive"
+                    className="bg-white/20 hover:bg-white/30 p-2 rounded-full text-white transition-colors"
+                >
+                    <User className="w-5 h-5" />
+                </button>
+            )}
+            <button 
+              onClick={() => setChatOpen(false)} 
+              className="text-white/80 hover:text-white hover:bg-white/10 p-2 rounded-full transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+        </div>
       </div>
 
       {/* Messages Area */}
@@ -133,11 +200,14 @@ const HelpChatbot = ({ setChatOpen }) => {
                 className={`max-w-[80%] p-3 rounded-2xl text-sm shadow-sm ${
                   msg.sender === 'user' 
                     ? 'bg-[#008BD0] text-white rounded-br-none' 
+                    : msg.sender === 'executive'
+                    ? 'bg-orange-100 text-gray-800 border border-orange-200 rounded-bl-none'
                     : 'bg-white text-gray-700 border border-gray-100 rounded-bl-none'
                 }`}
               >
                 {msg.text}
                 <div className={`text-[10px] mt-1 ${msg.sender === 'user' ? 'text-blue-100' : 'text-gray-400'}`}>
+                  {msg.sender === 'executive' && <span className="font-bold mr-1">Executive •</span>}
                   {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
               </div>

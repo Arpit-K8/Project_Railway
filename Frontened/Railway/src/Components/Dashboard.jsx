@@ -1,29 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-  Train,
-  Ticket,
-  Clock,
-  HelpCircle,
-  Armchair,
-  User,
-  Utensils,
-  Bell,
-  History,
-  Search,
-  ChevronRight,
-  MapPin,
-  Calendar,
-  CreditCard,
-  Settings,
-  LogOut,
-  TrendingUp,
-  Users,
-  DollarSign,
-  Zap,
-  Globe2,
-  Crown,
-} from "lucide-react";
+import {Train,Ticket,Clock,HelpCircle,Armchair,User,Utensils,Bell,History,Search,
+  ChevronRight,MapPin,Calendar,CreditCard,Settings,LogOut,TrendingUp,Users,DollarSign,Zap,
+  Globe2,Crown } from "lucide-react";
 import LogoutButton from "./LogoutButton";
 import TrainServices from "../Services/TrainServices";
 import FoodServices from "../Services/FoodServices";

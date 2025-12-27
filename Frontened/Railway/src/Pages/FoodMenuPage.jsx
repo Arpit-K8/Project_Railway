@@ -298,7 +298,7 @@ const FoodMenu = () => {
         price: "₹320",
         type: "non-veg",
         image:
-          "https://images.unsplash.com/photo-1606471191009-63994c53433b?w=500&q=80",
+          "https://img.freepik.com/premium-photo/chicken-thali-from-indian-cuisine-food-platter-consists-chicken-fryboiled-egg-curry-lentils-chicken-biryaniroti-onions-selective_726363-858.jpg?semt=ais_hybrid&w=740&q=80",
       },
       {
         name: "Veg Supreme Pizza",
