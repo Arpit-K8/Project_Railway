@@ -23,7 +23,9 @@ const BookTicketPage = () => {
 
   const [bookingDetails, setBookingDetails] = useState({
     travelClass: '3A',
-    quota: 'GN'
+    quota: 'GN',
+    isCoolieOpted: false,
+    trolleyCount: 0
   });
 
   const [loading, setLoading] = useState(false);
@@ -61,9 +63,10 @@ const BookTicketPage = () => {
   e.preventDefault();
   setLoading(true);
 
+  const coolieCharges = bookingDetails.isCoolieOpted ? (bookingDetails.trolleyCount * 39) : 0;
   const baseFare = 1245 * passengers.length;
   const gst = Math.round(baseFare * 0.05);
-  const totalAmount = baseFare + gst;
+  const totalAmount = baseFare + gst + coolieCharges;
 
     const getMaxSeats = (travelClass) => {
       switch(travelClass) {
@@ -99,6 +102,8 @@ const BookTicketPage = () => {
     })),
     contactEmail: contactInfo.email,
     contactPhone: contactInfo.mobile,
+    isCoolieOpted: bookingDetails.isCoolieOpted,
+    trolleyCount: bookingDetails.trolleyCount,
     basefare: baseFare,
     gst: gst,
     totalAmount: totalAmount
@@ -198,6 +203,54 @@ const BookTicketPage = () => {
                             </div>
                         </div>
                     </div>
+
+                   {/* Coolie Option */}
+                   <div className="p-6 border-b border-gray-100 bg-blue-50/30">
+                       <div className="flex items-center justify-between">
+                           <div className="flex items-center gap-3">
+                               <div className="p-2.5 bg-yellow-100 text-yellow-600 rounded-xl">
+                                   <Briefcase size={22} />
+                               </div>
+                               <div>
+                                   <h3 className="font-bold text-gray-800">Add Coolie Service</h3>
+                                   <p className="text-sm text-gray-500">Get help with your luggage (₹39/trolley)</p>
+                               </div>
+                           </div>
+                          
+                           <label className="relative inline-flex items-center cursor-pointer">
+                               <input 
+                                   type="checkbox" 
+                                   className="sr-only peer"
+                                   checked={bookingDetails.isCoolieOpted}
+                                   onChange={(e) => setBookingDetails(prev => ({ ...prev, isCoolieOpted: e.target.checked, trolleyCount: e.target.checked ? 1 : 0 }))}
+                               />
+                               <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[#008BD0]"></div>
+                           </label>
+                       </div>
+
+                       {bookingDetails.isCoolieOpted && (
+                           <div className="mt-4 flex items-center justify-between bg-white p-4 rounded-xl border border-blue-100 animate-in fade-in slide-in-from-top-2">
+                               <span className="font-semibold text-gray-700">Number of Trolleys</span>
+                               <div className="flex items-center gap-4">
+                                   <button 
+                                       type="button"
+                                       onClick={() => setBookingDetails(prev => ({ ...prev, trolleyCount: Math.max(1, prev.trolleyCount - 1) }))}
+                                       className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 text-gray-600"
+                                   >
+                                       -
+                                   </button>
+                                   <span className="font-bold text-lg w-4 text-center">{bookingDetails.trolleyCount}</span>
+                                   <button 
+                                       type="button"
+                                       onClick={() => setBookingDetails(prev => ({ ...prev, trolleyCount: prev.trolleyCount + 1 }))}
+                                       className="w-8 h-8 rounded-full bg-[#008BD0] text-white flex items-center justify-center hover:bg-[#0077b3] shadow-sm"
+                                   >
+                                       +
+                                   </button>
+                               </div>
+                           </div>
+                       )}
+                   </div>
                     
                     {/* Passengers Loop */}
                     <div className="space-y-8">
@@ -427,10 +480,19 @@ const BookTicketPage = () => {
                     <div className="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
                         <div className="flex justify-between items-center mb-1">
                             <span className="text-yellow-800 font-semibold text-sm">Total Amount</span>
-                            <span className="text-2xl font-bold text-[#1C335C]">₹ {1245 * passengers.length}</span>
+                            <span className="text-2xl font-bold text-[#1C335C]">₹ {1245 * passengers.length + (bookingDetails.isCoolieOpted ? bookingDetails.trolleyCount * 39 : 0)}</span>
                         </div>
-                        <p className="text-xs text-yellow-600">Base fare + taxes included</p>
+                        <p className="text-xs text-yellow-600">Base fare + taxes + services included</p>
                     </div>
+
+                    {bookingDetails.isCoolieOpted && (
+                        <div className="bg-blue-50/50 rounded-xl p-3 border border-blue-100">
+                             <div className="flex justify-between items-center text-sm">
+                                <span className="text-gray-600">Coolie Charges ({bookingDetails.trolleyCount} x ₹39)</span>
+                                <span className="font-bold text-[#008BD0]">+ ₹{bookingDetails.trolleyCount * 39}</span>
+                            </div>
+                        </div>
+                    )}
 
                     <div className="flex items-center gap-2 justify-center text-xs text-gray-400 mt-2">
                         <CreditCard size={14} /> Secure Payment Processing

@@ -197,6 +197,12 @@ const BookingDetailsModal = ({ booking, onClose }) => {
                 <span className="text-gray-600">GST (5%)</span>
                 <span className="font-semibold text-[#1C335C]">₹{fareDetails.gst}</span>
               </div>
+              {booking.isCoolieOpted && (
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-gray-600">Coolie Charges ({booking.trolleyCount} x ₹39)</span>
+                  <span className="font-semibold text-[#1C335C]">₹{booking.trolleyCount * 39}</span>
+                </div>
+              )}
               <div className="border-t-2 border-gray-300 pt-2 mt-2">
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-[#1C335C]">Total Amount</span>
@@ -519,9 +525,14 @@ const BookingHistory = () => {
 
       const paymentData = [
         ['Base Fare:', `₹${fareDetails.baseFare}`],
-        ['GST (5%):', `₹${fareDetails.gst}`],
-        ['Total Amount:', `₹${booking.totalAmount || booking.amount || 0}`]
+        ['GST (5%):', `₹${fareDetails.gst}`]
       ];
+
+      if (booking.isCoolieOpted) {
+        paymentData.push(['Coolie Charges:', `₹${booking.trolleyCount * 39} (${booking.trolleyCount} Trolleys)`]);
+      }
+
+      paymentData.push(['Total Amount:', `₹${booking.totalAmount || booking.amount || 0}`]);
 
       paymentData.forEach(([label, value]) => {
         doc.setFont('helvetica', 'normal');

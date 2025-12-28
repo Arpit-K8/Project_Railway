@@ -54,7 +54,8 @@ const TourBookTicketPage = () => {
   setLoading(true);
 
   const discountAmount = passengers.length > 2 ? 1958 : 0;
-  const totalAmount = Math.max(0, (tourPackage.price * passengers.length) - discountAmount);
+  const coolieCharges = bookingDetails.isCoolieOpted ? (bookingDetails.trolleyCount * 39) : 0;
+  const totalAmount = Math.max(0, (tourPackage.price * passengers.length) - discountAmount) + coolieCharges;
 
   const bookingData = {
     tourPackage: {
@@ -72,6 +73,8 @@ const TourBookTicketPage = () => {
     })),
     contactEmail: contactInfo.email,
     contactPhone: contactInfo.mobile,
+    isCoolieOpted: bookingDetails.isCoolieOpted,
+    trolleyCount: bookingDetails.trolleyCount,
     totalAmount
   };
 
@@ -106,7 +109,8 @@ const TourBookTicketPage = () => {
   }
 
   const discountAmount = passengers.length > 2 ? 1958 : 0;
-  const totalPrice = Math.max(0, (tourPackage.price || 0) * passengers.length - discountAmount);
+  const coolieCharges = bookingDetails.isCoolieOpted ? (bookingDetails.trolleyCount * 39) : 0;
+  const totalPrice = Math.max(0, (tourPackage.price || 0) * passengers.length - discountAmount) + coolieCharges;
 
   return (
     <>
@@ -282,6 +286,55 @@ const TourBookTicketPage = () => {
                             </div>
                         </div>
                     </div>
+
+
+                   {/* Coolie Option */}
+                   <div className="bg-blue-50/30 p-6 border-b border-t border-gray-100">
+                       <div className="flex items-center justify-between">
+                           <div className="flex items-center gap-3">
+                               <div className="p-2.5 bg-yellow-100 text-yellow-600 rounded-xl">
+                                   <Backpack size={22} />
+                               </div>
+                               <div>
+                                   <h3 className="font-bold text-[#1C335C]">Add Coolie Service</h3>
+                                   <p className="text-sm text-gray-500">Get help with your luggage (₹39/trolley)</p>
+                               </div>
+                           </div>
+                          
+                           <label className="relative inline-flex items-center cursor-pointer">
+                               <input 
+                                   type="checkbox" 
+                                   className="sr-only peer"
+                                   checked={bookingDetails.isCoolieOpted}
+                                   onChange={(e) => setBookingDetails(prev => ({ ...prev, isCoolieOpted: e.target.checked, trolleyCount: e.target.checked ? 1 : 0 }))}
+                               />
+                               <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[#008BD0]"></div>
+                           </label>
+                       </div>
+
+                       {bookingDetails.isCoolieOpted && (
+                           <div className="mt-4 flex items-center justify-between bg-white p-4 rounded-xl border border-blue-100 animate-in fade-in slide-in-from-top-2">
+                               <span className="font-semibold text-gray-700">Number of Trolleys</span>
+                               <div className="flex items-center gap-4">
+                                   <button 
+                                       type="button"
+                                       onClick={() => setBookingDetails(prev => ({ ...prev, trolleyCount: Math.max(1, prev.trolleyCount - 1) }))}
+                                       className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 text-gray-600"
+                                   >
+                                       -
+                                   </button>
+                                   <span className="font-bold text-lg w-4 text-center">{bookingDetails.trolleyCount}</span>
+                                   <button 
+                                       type="button"
+                                       onClick={() => setBookingDetails(prev => ({ ...prev, trolleyCount: prev.trolleyCount + 1 }))}
+                                       className="w-8 h-8 rounded-full bg-[#008BD0] text-white flex items-center justify-center hover:bg-[#0077b3] shadow-sm"
+                                   >
+                                       +
+                                   </button>
+                               </div>
+                           </div>
+                       )}
+                   </div>
                 </div>
                 
                 {/* Form Footer */}
@@ -344,8 +397,14 @@ const TourBookTicketPage = () => {
                             </div>
                             <div className="flex justify-between text-gray-600 text-sm">
                                 <span>Taxes & Fees</span>
-                                <span>Included</span>
+                                  <span>Included</span>
                             </div>
+                            {bookingDetails.isCoolieOpted && (
+                                <div className="flex justify-between text-[#008BD0] text-sm font-medium">
+                                    <span>Coolie Charges ({bookingDetails.trolleyCount} x ₹39)</span>
+                                    <span>+ ₹{(bookingDetails.trolleyCount * 39).toLocaleString()}</span>
+                                </div>
+                            )}
                             <div className="border-t border-dashed border-gray-200 my-2 pt-2 flex justify-between items-end">
                                 <span className="font-bold text-[#1C335C]">Total Payable</span>
                                 <span className="text-2xl font-bold text-[#008BD0]">₹{(totalPrice).toLocaleString()}</span>

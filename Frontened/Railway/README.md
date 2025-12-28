@@ -14,6 +14,7 @@ React 19 + Vite single-page app for the Railway experience: search trains, book 
 - Royal luxury journeys showcase with expandable itineraries ([src/Pages/RoyalPage.jsx](src/Pages/RoyalPage.jsx)).
 - Tour packages carousel and booking CTA ([src/Pages/TourMainPage.jsx](src/Pages/TourMainPage.jsx)).
 - Live train status via RapidAPI endpoint and timeline rendering ([src/Pages/TrainStatusPage.jsx](src/Pages/TrainStatusPage.jsx)).
+- Executive chat interface for premium customer support and assistance.
 - Profile management with Cloudinary avatar upload and API-backed updates ([src/Services/Profile.jsx](src/Services/Profile.jsx)).
 - Auth-related routes for login, signup, verify, reset, change password; dashboard shell and food/notifications pages available.
 - Dashboard hub with sidebar navigation to tickets, tatkal, PNR, seat availability, routes, services, food, tours, royal, history, notifications, help, and profile sections ([src/Components/Dashboard.jsx](src/Components/Dashboard.jsx)).
@@ -21,7 +22,7 @@ React 19 + Vite single-page app for the Railway experience: search trains, book 
 ### Project structure
 - Entry: [src/main.jsx](src/main.jsx), router: [src/App.jsx](src/App.jsx)
 - Components: landing page, navbar/footer, auth screens, dashboard cards
-- Pages: booking, royal journeys, tour packages, food menu, train status
+- Pages: booking, royal journeys, tour packages, food menu, train status, executive chat
 - Services: booking history, notifications, profile, seat/PNR/status helpers
 - utils: payment helpers, validation
 

@@ -58,6 +58,14 @@ const ticketBookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isCoolieOpted: {
+    type: Boolean,
+    default: false,
+  },
+  trolleyCount: {
+    type: Number,
+    default: 0,
+  },
 
   paymentId: {
     type: mongoose.Schema.Types.ObjectId,
