@@ -41,6 +41,33 @@ const Dashboard = () => {
   }, [location.state]);
 
   useEffect(() => {
+    const fetchUser = async () => {
+      // Check if user is already in storage
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) return;
+
+      try {
+        // Try fetching user from backend (relies on cookies)
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/current-user`,
+          { withCredentials: true }
+        );
+
+        if (response.data.success) {
+          const user = response.data.data;
+          localStorage.setItem("user", JSON.stringify(user));
+          // Dispatch event to update Navbar
+          window.dispatchEvent(new Event("storage"));
+        }
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+         // If fetch fails (401), redirect to login
+         navigate("/login");
+      }
+    };
+
+    fetchUser();
+
     const fetchData = async () => {
       try{
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/total-users`);

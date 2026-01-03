@@ -18,7 +18,7 @@ End-to-end railway experience with separate frontend (React/Vite) and backend (E
 - Travel utilities: live train status timeline, PNR status, seat availability, coach seating, routes, train services.
 - Food and tours: food ordering flow and curated tour packages (including royal journeys).
 - Coolie Booking: optional add-on service for luggage assistance during ticket booking (both regular and tour), reflected in total price and ticket details.
-- Account & notifications: signup/login, email verification, password reset, profile with Cloudinary avatar, notifications CRUD, booking history.
+- Account & notifications: signup/login, email verification, password reset, Google OAuth with additional details collection (Doc.jsx), profile with Cloudinary avatar, notifications CRUD, booking history.
 - Dashboard hub: sidebar navigation to tickets, tatkal, PNR, seat, route, services, food, tours, royal, history, notifications, help, profile.
 
 ### Repos & Paths

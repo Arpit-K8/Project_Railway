@@ -16,7 +16,7 @@ React 19 + Vite single-page app for the Railway experience: search trains, book 
 - Live train status via RapidAPI endpoint and timeline rendering ([src/Pages/TrainStatusPage.jsx](src/Pages/TrainStatusPage.jsx)).
 - Executive chat interface for premium customer support and assistance.
 - Profile management with Cloudinary avatar upload and API-backed updates ([src/Services/Profile.jsx](src/Services/Profile.jsx)).
-- Auth-related routes for login, signup, verify, reset, change password; dashboard shell and food/notifications pages available.
+- Auth-related routes for login, signup, verify, reset, change password; new `/doc` page for collecting missing Google profile details; dashboard shell and food/notifications pages available.
 - Dashboard hub with sidebar navigation to tickets, tatkal, PNR, seat availability, routes, services, food, tours, royal, history, notifications, help, and profile sections ([src/Components/Dashboard.jsx](src/Components/Dashboard.jsx)).
 
 ### Project structure

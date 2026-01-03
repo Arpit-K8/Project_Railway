@@ -4,7 +4,7 @@ import { ApiError } from "../utils/api-error.js";
 import { ApiResponse } from "../utils/api-response.js";
 import { asyncHandler } from "../utils/async-handler.js";
 import { User } from "../models/userModel.js";
-import { 
+import {
   emailVerificationMailgenContent,
   forgotPasswordMailgenContent,
   sendEmail,
@@ -40,9 +40,9 @@ const generateAccessAndRefreshTokens = async (userId) => {
 //function for register controller
 const registerUser = asyncHandler(async (req, res) => {
   const { email, username, password,
-    phone, dob , govIdType, govIdNumber , securityQuestion,
+    phone, dob, govIdType, govIdNumber, securityQuestion,
     securityAnswer
-   } = req.body;
+  } = req.body;
 
   const existedUser = await User.findOne({
     $or: [{ username }, { email }],
@@ -57,7 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
     username,
     phone,
-    dob, 
+    dob,
     govIdType,
     govIdNumber,
     securityQuestion,
@@ -94,8 +94,8 @@ const registerUser = asyncHandler(async (req, res) => {
     "-password -refreshToken -emailVerificationToken -emailVerificationExpiry -securityAnswer"
   );
 
-  if(!createdUser){
-    throw new ApiError(500 , "Something went wrong while registering the user");
+  if (!createdUser) {
+    throw new ApiError(500, "Something went wrong while registering the user");
   }
 
   return res
@@ -111,7 +111,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
 //function for login controller
 const login = asyncHandler(async (req, res) => {
-  const { email, password , rememberMe } = req.body;
+  const { email, password, rememberMe } = req.body;
 
   //email based login
   if (!email) {
@@ -143,14 +143,14 @@ const login = asyncHandler(async (req, res) => {
     secure: true,
     sameSite: "strict",
     maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 // 30 days
-    : 24 * 60 * 60 * 1000 //1day
+      : 24 * 60 * 60 * 1000 //1day
   };
 
   console.log("🍪 Cookie Settings:", {
-  rememberMe,
-  maxAge: options.maxAge,
-  days: options.maxAge / (24 * 60 * 60 * 1000),
-  expiresAt: new Date(Date.now() + options.maxAge)
+    rememberMe,
+    maxAge: options.maxAge,
+    days: options.maxAge / (24 * 60 * 60 * 1000),
+    expiresAt: new Date(Date.now() + options.maxAge)
   })
 
   return res
@@ -247,14 +247,14 @@ const verifyEmail = asyncHandler(async (req, res) => {
 //this is only done by the user is already logged in//
 const resendEmailVerification = asyncHandler(async (req, res) => {
   // const user = await User.findById(req.user?._id);
-  const {email} = req.body;
+  const { email } = req.body;
 
-  if(!email){
-    throw new ApiError(400 , "Email is required");
+  if (!email) {
+    throw new ApiError(400, "Email is required");
   }
 
   //find the user in db by email
-  const user = await User.findOne({email});
+  const user = await User.findOne({ email });
 
   if (!user) {
     throw new ApiError(404, "User does not exists");
@@ -453,6 +453,15 @@ const googleAuthSuccess = asyncHandler(async (req, res) => {
   };
 
   //redirect to your react frontent with the tokens in cookies
+
+  if (!user.phone || !user.govIdNumber) {
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
+      .redirect(`${process.env.CLIENT_URL}/doc`);
+  }
+
   return res
     .status(200)
     .cookie("accessToken", accessToken, options)
@@ -461,7 +470,7 @@ const googleAuthSuccess = asyncHandler(async (req, res) => {
 });
 
 const totalUsers = asyncHandler(async (req, res) => {
-  const userCount = await User.countDocuments(); 
+  const userCount = await User.countDocuments();
   return res
     .status(200)
     .json(new ApiResponse(200, { totalUsers: userCount }, "Total users fetched successfully"));

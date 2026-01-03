@@ -18,7 +18,7 @@ Express + MongoDB API powering authentication, bookings, payments, notifications
 - Utilities: Mail helper [utils/mail.js](Backened/utils/mail.js), response/error wrappers in [utils](Backened/utils)
 
 ### API surface (high level)
-- Auth: register, login, logout, refresh, current-user, change-password, forgot/reset password, email verify/resend, Google OAuth callback
+- Auth: register, login, logout, refresh, current-user, change-password, forgot/reset password, email verify/resend, Google OAuth callback (with conditional redirect to /doc for missing details).
 - User: update-profile
 - Payments/Bookings: create-order, verify, failure hook, list bookings, booking detail, cancel booking
 - Notifications: list, mark read/read-all, delete one/all

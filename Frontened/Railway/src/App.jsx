@@ -22,6 +22,7 @@ import TourBookTicketPage from './Pages/TourBookTicketPage.jsx';
 import ChangePassword from './Components/ChangePassword.jsx';
 import Profile from './Services/Profile.jsx';
 import ExecutiveChatPage from './Pages/ExecutiveChatPage.jsx';
+import DocPage from './Pages/Doc.jsx';
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
   { path: '/change-password', element: <ChangePassword />},
   { path: '/profile', element: <Profile />},
   { path: '/executive-chat-demo', element: <ExecutiveChatPage />},
+  { path: '/doc', element: <><Navbar /><DocPage /><Footer /></> },
   { path: '*', element: <NotFound /> }
 
 ]);
