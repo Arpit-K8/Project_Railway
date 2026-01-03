@@ -2,12 +2,13 @@ import { X, Train, Lock, Mail, Eye, EyeOff, ArrowRight, KeyRound, CheckCircle } 
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/Logo.png";
 import LoginBg from "../assets/login_bg.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { validateEmail, validatePassword } from "../utils/validation";
 import axios from "axios";
 
 const LoginPage = ({ isOpen = true, onClose = () => {} }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -199,7 +200,13 @@ const LoginPage = ({ isOpen = true, onClose = () => {} }) => {
           {/* Right Side - Login Form */}
           <div className="w-full md:w-1/2 bg-white/80 backdrop-blur-2xl p-8 md:p-12 relative">
             <button
-              onClick={onClose}
+              onClick={() => {
+                if(location.pathname === '/login') {
+                  navigate('/');
+                } else {
+                  onClose();
+                }
+              }}
               className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors p-2 hover:bg-gray-100 rounded-full"
               aria-label="Close"
             >
